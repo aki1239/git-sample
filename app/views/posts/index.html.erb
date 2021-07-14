@@ -29,25 +29,21 @@
       <% @posts.each do |post| %>
         <tr>
             <td><%= post.text %></td>
-            <td><%= post.user.nickname %></td>
+            <% if user_signed_in? %> 
+            <td><%= link_to post.user.nickname, user_path(post.user), method: :get %></td>
+            <%else%>
+            <td><%= post.user.nickname%></td>
+            <%end%>
             <td><%= post.created_at.to_s(:datetime_base) %></td>
 
-<% if user_signed_in? %> 
-   <%= current_user.nickname %>さん
-     <li><%= link_to "マイページ", root_path, class: "nickname" %></li>
-      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"logout" %></li>
-        <% @users.each do |user| %>
-          <% if user.present? %>
-            <li><%= link_to user.nickname, user_path(user.id), method: :get %></li>
-          <% end %>
-        <% end %>
-                 <% else %>
-                      <li><%= link_to 'ログイン', new_user_session_path, class:"sign-in"%></li>
-                      <li><%= link_to '新規登録', new_user_registration_path, class:"sign-up"%></li> 
-                  <% end %>
-            <td><%= link_to "詳細" , post_path(post.id), method: :get %></td>
+            <td><%= link_to "ルーム作成", chats_path %></td>
+           
+           <td><%= link_to "詳細" , post_path(post.id), method: :get %></td>
 
             <td><%= button_to "削除" , post_path(post.id), method: :delete %></td>
+
+
+
         </tr>
       <% end %>
   </tbody>

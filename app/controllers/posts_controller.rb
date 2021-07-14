@@ -4,7 +4,9 @@ class PostsController < ApplicationController
 
   def index
     if user_signed_in?
-      @users = User.where.not(id: current_user.id)
+      #@users = User.where.not(id: current_user.id)
+      #@users = User.all
+      #@user = User.find(params[:id])
     end
     @posts = Post.includes(:user).order('created_at DESC')
   end

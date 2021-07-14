@@ -1,1 +1,10 @@
 ddd
+
+<%= @post.user.nickname%>さんの投稿
+<%= @post.text %>
+<%= @post.created_at%>
+
+<div><%= link_to"トップページへ", root_path%></div>
+  <%#if current_user.id? && @user.id %>
+    <%= link_to "プロフィール編集", root_path%>
+  <%#end%>
